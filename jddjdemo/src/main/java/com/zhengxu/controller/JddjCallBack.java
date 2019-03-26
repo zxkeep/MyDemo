@@ -3,6 +3,7 @@ package com.zhengxu.controller;
 import com.zhengxu.domain.ResulMap;
 import com.zhengxu.domain.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,8 +20,8 @@ public class JddjCallBack {
         System.out.println(user);
         ResulMap resulMap = new ResulMap();
         resulMap.setCode("200");
-        resulMap.setMsg("接受成功");
-        resulMap.setData("chenggongle");
+        resulMap.setMsg("success");
+        resulMap.setData(" ");
         return resulMap;
     }
 }
