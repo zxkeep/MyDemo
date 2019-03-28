@@ -24,5 +24,6 @@ public class JedisTest extends BaseTest{
         Set<String> keys = jedis.keys("*");
         System.out.println(keys);
 
+
     }
 }
