@@ -4,6 +4,8 @@ import com.zhengxu.service.IProductService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 public class AddTest extends BaseTest {
 
     @Autowired
@@ -23,6 +25,8 @@ public class AddTest extends BaseTest {
         Product product = getPro();
         productService.add(product);
         System.out.println(productService);
+        List<Product> list = productService.getAll();
+        System.out.println(list);
     }
 
     private Product getPro(){
