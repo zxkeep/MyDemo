@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-@Transactional(propagation = Propagation.SUPPORTS)
+@Transactional(propagation = Propagation.SUPPORTS,rollbackFor = Exception.class)
 public class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Autowired
     private BaseMapper baseMapper;
 
-    @Transactional()
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void add(T t) {
         baseMapper.insert(t);
