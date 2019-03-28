@@ -1,0 +1,45 @@
+package com.zhengxu.service.impl;
+
+import com.zhengxu.mapper.BaseMapper;
+import com.zhengxu.service.IBaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Transactional(propagation = Propagation.SUPPORTS)
+public class BaseServiceImpl<T> implements IBaseService<T> {
+
+    @Autowired
+    private BaseMapper baseMapper;
+
+    @Transactional()
+    @Override
+    public void add(T t) {
+        baseMapper.insert(t);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void update(T t) {
+        baseMapper.update(t);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void delete(Serializable id) {
+        baseMapper.delete(id);
+    }
+
+    @Override
+    public T getOne(Serializable id) {
+        return (T) baseMapper.selectOne(id);
+    }
+
+    @Override
+    public List<T> getAll() {
+        return baseMapper.selectAll();
+    }
+}

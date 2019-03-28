@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class JedisTest extends BaseTest{
 
-    @Autowired
+    //@Autowired
     private JedisPool jedisPool;
 
     @Test

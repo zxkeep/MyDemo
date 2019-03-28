@@ -5,10 +5,10 @@ import org.springframework.stereotype.Controller;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-@Controller
+
 public class JeidsTest {
 
-    @Autowired
+   // @Autowired
     private JedisPool jedisPool;
 
     public static void main(String[] args) {
