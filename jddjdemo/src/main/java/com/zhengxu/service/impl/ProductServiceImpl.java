@@ -1,6 +1,7 @@
 package com.zhengxu.service.impl;
 
 import com.zhengxu.domain.Product;
+import com.zhengxu.mapper.ProductMapper;
 import com.zhengxu.service.IProductService;
 import org.springframework.stereotype.Service;
 

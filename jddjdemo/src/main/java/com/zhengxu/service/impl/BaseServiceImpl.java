@@ -13,7 +13,7 @@ import java.util.List;
 public class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Autowired
-    private BaseMapper baseMapper;
+    private BaseMapper<T> baseMapper;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
