@@ -2,6 +2,7 @@ package com.zhengxu.controller;
 
 import com.zhengxu.domain.Product;
 import com.zhengxu.service.IProductService;
+import com.zhengxu.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,12 @@ public class ProductController {
     private IProductService productService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public void add(@RequestBody Product product){
+    public ResultVo add(@RequestBody Product product){
         productService.add(product);
+        ResultVo resultVo = new ResultVo();
+        resultVo.setErrCode("0000");
+        resultVo.setErrMsg("操作成功。。。");
+        return resultVo;
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
