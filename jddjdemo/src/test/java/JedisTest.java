@@ -1,5 +1,6 @@
 import com.alibaba.fastjson.JSONObject;
 import com.zhengxu.domain.User;
+import com.zhengxu.utils.RedisCacheManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
@@ -14,6 +15,9 @@ public class JedisTest extends BaseTest{
 
     //@Autowired
     private JedisPool jedisPool;
+
+    @Autowired
+    private RedisCacheManager redisCacheManager;
 
     @Test
     public void  testJedis(){
@@ -57,5 +61,11 @@ public class JedisTest extends BaseTest{
         String json = JSONObject.toJSONString(user);
         System.out.println(json);
         jedis.set(user.getUid().toString(),json);
+    }
+
+    @Test
+    public void getAll(){
+        Set<String> allKeys = redisCacheManager.getAllKeys();
+        System.out.println(allKeys);
     }
 }
