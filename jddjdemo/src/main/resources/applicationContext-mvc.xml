@@ -48,12 +48,29 @@
         <property name="resolveLazily" value="true"/>
     </bean>
 
+    <!--配置多个视图解析器-->
+    <!-- 定义HTML文件的位置 -->
+    <bean id="htmlviewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="com.zhengxu.ViewResolver.HtmlResourceView"/>
+        <property name="order" value="0" />
+        <property name="prefix" value="/cms/"/>
+        <property name="suffix" value=".html" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+    </bean>
+    <!-- 定义JSP文件的位置 -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="1" />
+        <property name="prefix" value="/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
     <!-- 配置ViewResolver 。可用多个ViewResolver 。使用order属性排序。   InternalResourceViewResolver 放在最后-->
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+   <!-- <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="order" value="1"></property>
         <property name="mediaTypes">
             <map>
-                <!-- 告诉视图解析器，返回的类型为json格式 -->
+                &lt;!&ndash; 告诉视图解析器，返回的类型为json格式 &ndash;&gt;
                 <entry key="json" value="application/json" />
                 <entry key="xml" value="application/xml" />
                 <entry key="htm" value="text/htm" />
@@ -61,12 +78,41 @@
         </property>
         <property name="defaultViews">
             <list>
-                <!-- ModelAndView里的数据变成JSON -->
+                &lt;!&ndash; ModelAndView里的数据变成JSON &ndash;&gt;
                 <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
             </list>
         </property>
         <property name="ignoreAcceptHeader" value="true"></property>
+    </bean>-->
+    <!--start:使用Jackson 2.x的配置，需要导入的jar包：jackson-core-xxx.jar、jackson-annotations-xxx.jar、jackson-databind-xxx.jar-->
+    <!--通过处理器映射DefaultAnnotationHandlerMapping来开启支持@Controller注解-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <!--通过处理器适配器AnnotationMethodHandlerAdapter来开启支持@RequestMapping注解-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <!-- 设置返回字符串编码 -->
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name = "supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <!-- json转换器 -->
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
     </bean>
+    <!--end:使用Jackson 2.x的配置，需要导入的jar包：jackson-core-xxx.jar、jackson-annotations-xxx.jar、jackson-databind-xxx.jar-->
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
