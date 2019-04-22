@@ -23,7 +23,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements IPro
 
     @Override
     public List<Product> getAll() {
-
+       Long start=System.currentTimeMillis();
         List<Product> list = null;
         try {
 //            Set<String> allKeys = redisCacheManager.getAllKeys();
@@ -38,7 +38,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements IPro
         }
         if (list==null || list.size()<0){
             System.out.println("从数据库获取："+productMapper.selectAll());
-            return productMapper.selectAll();
+            List<Product> products = productMapper.selectAll();
+            Long end = System.currentTimeMillis();
+            System.out.println(end-start);
+            return products;
         }else{
             list.sort(new Comparator<Product>() {
                 @Override
@@ -47,6 +50,8 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements IPro
                 }
             });
             System.out.println("从redis获取："+list);
+            Long end = System.currentTimeMillis();
+            System.out.println(end-start);
             return list;
         }
     }
