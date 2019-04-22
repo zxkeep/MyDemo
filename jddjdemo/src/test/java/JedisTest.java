@@ -1,5 +1,8 @@
 import com.alibaba.fastjson.JSONObject;
+import com.zhengxu.domain.Product;
 import com.zhengxu.domain.User;
+import com.zhengxu.mapper.ProductMapper;
+import com.zhengxu.service.IProductService;
 import com.zhengxu.utils.RedisCacheManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,12 @@ public class JedisTest extends BaseTest{
 
     @Autowired
     private RedisCacheManager redisCacheManager;
+
+    @Autowired
+    private IProductService productService;
+
+    @Autowired
+    private ProductMapper productMapper;
 
 //    @Test
 //    public void  testJedis(){
@@ -67,5 +76,32 @@ public class JedisTest extends BaseTest{
     public void getAll(){
         Set<String> allKeys = redisCacheManager.getAllKeys();
         System.out.println(allKeys);
+    }
+
+    @Test
+    public void removeAll(){
+        Set<String> allKeys = redisCacheManager.getAllKeys();
+        for(String key :allKeys ){
+            redisCacheManager.del(key);
+        }
+    }
+
+    @Test
+    public void updateToRedis(){
+        List<Product> productList = productMapper.selectAll();
+        for (Product product: productList){
+            Long id = product.getId();
+            redisCacheManager.set(String.valueOf(id),product);
+        }
+        redisCacheManager.set("product", productList);
+    }
+
+    @Test
+    public void getAllProducts(){
+        List<Product> productList = productService.getAll();
+        for (Product product: productList){
+            System.out.println(product);
+        }
+
     }
 }

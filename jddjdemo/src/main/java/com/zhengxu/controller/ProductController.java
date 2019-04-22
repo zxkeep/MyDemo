@@ -27,17 +27,21 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public void update(@RequestBody Product product){
+    public ResultVo update(@RequestBody Product product){
         productService.update(product);
+        ResultVo resultVo = new ResultVo();
+        resultVo.setErrCode("0000");
+        resultVo.setErrMsg("操作成功。。。");
+        return resultVo;
     }
 
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public void update(@RequestBody Long id){
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public void update(Long id){
         productService.delete(id);
     }
 
-    @RequestMapping(value = "/queryOne",method = RequestMethod.POST)
-    public Product queryOne(@RequestBody Long id){
+    @RequestMapping(value = "/queryOne",method = RequestMethod.GET)
+    public Product queryOne(Long id){
         return productService.getOne(id);
     }
 
