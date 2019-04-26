@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author zhengxu
  * @create 2019-04-26 16:28
- * @desc Swagger2配置类
+ * @desc Swagger2 的配置类
  */
 @Configuration
 @EnableSwagger2     //Loads the spring beans required by the framework
