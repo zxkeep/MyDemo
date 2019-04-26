@@ -150,4 +150,9 @@
         <task:scheduled ref="myTask" method="taskTest" cron="0/10 * * * * ?"/>
     </task:scheduled-tasks>
 
+    <!-- 引入swagger相关 -->
+    <bean class="com.zhengxu.config.MySwaggerConfig"/>
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+
 </beans>
