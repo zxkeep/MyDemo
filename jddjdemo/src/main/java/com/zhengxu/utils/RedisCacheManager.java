@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -23,7 +24,12 @@ public class RedisCacheManager {
         this.redisTemplate = redisTemplate;
     }
 
-    
+    private StringRedisTemplate stringRedisTemplate;
+
+    public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
     /**
      * 指定缓存失效时间
      * 

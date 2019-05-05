@@ -124,9 +124,14 @@
         <property name="enableTransactionSupport" value="true"></property>
     </bean>
 
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+
     <!--自定义redis工具类,在需要缓存的地方注入此类  -->
     <bean id="redisrCacheManager" class="com.zhengxu.utils.RedisCacheManager">
         <property name="redisTemplate" ref="redisTemplate" />
+        <property name="stringRedisTemplate" ref="stringRedisTemplate" />
     </bean>
 
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
