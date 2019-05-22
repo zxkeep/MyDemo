@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public class MyTask {
 
     public void taskTest(){
-        System.out.println("执行定时任务了。。。。。");
+        System.out.println("执行定时任务了。。。。。。");
     }
 }
