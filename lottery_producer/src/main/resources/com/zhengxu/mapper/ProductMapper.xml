@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--客户映射 指定到dao接口 -->
+<mapper namespace="com.zhengxu.mapper.ProductMapper">
+    <resultMap id="baseMap" type="Product">
+        <id column="id" property="id"/>
+        <result column="PRO_NAME" property="proName"/>
+        <result column="PRO_NUMBER" property="proNumber"/>
+        <result column="PRO_PRICE" property="proPrice"/>
+        <result column="DESCRPTION" property="descrption"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+    <select id="selectOne" resultMap="baseMap">
+        SELECT * FROM t_product WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="baseMap">
+        SELECT *
+        FROM t_product
+    </select>
+
+    <update id="update" parameterType="Product">
+        UPDATE t_product
+        SET
+        PRO_NAME=#{proName},PRO_NUMBER=#{proNumber},PRO_PRICE=#{proPrice},DESCRPTION=#{descrption},STATUS=#{status}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM t_product WHERE id=#{id}
+    </delete>
+
+    <insert id="insert" parameterType="Product" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO t_product(PRO_NAME, PRO_NUMBER, PRO_PRICE, DESCRPTION, STATUS)
+        VALUES (#{proName},#{proNumber},#{proPrice},#{descrption},#{status})
+    </insert>
+</mapper>
