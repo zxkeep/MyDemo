@@ -5,6 +5,8 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:jms="http://www.springframework.org/schema/jms"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                         http://www.springframework.org/schema/context
@@ -14,7 +16,11 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
                         http://www.springframework.org/schema/task
-                        http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+                        http://www.springframework.org/schema/task/spring-task-3.1.xsd
+                        http://www.springframework.org/schema/jms
+                        http://www.springframework.org/schema/jms/spring-jms.xsd
+                        http://activemq.apache.org/schema/core
+                        http://activemq.apache.org/schema/core/activemq-core-5.8.0.xsd">
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.zhengxu" />
 
@@ -162,5 +168,41 @@
     <bean class="com.zhengxu.config.MySwaggerConfig"/>
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+
+    <!-- ActiveMQ 连接工厂 -->
+    <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供-->
+    <!-- 如果连接网络：tcp://ip:61616；未连接网络：tcp://localhost:61616 以及用户名，密码-->
+    <amq:connectionFactory id="amqConnectionFactory"
+                           brokerURL="tcp://localhost:61616" userName="admin" password="admin"  />
+
+    <!-- Spring Caching连接工厂 -->
+    <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
+        <property name="targetConnectionFactory" ref="amqConnectionFactory"></property>
+        <!-- 同上，同理 -->
+        <!-- <constructor-arg ref="amqConnectionFactory" /> -->
+        <!-- Session缓存数量 -->
+        <property name="sessionCacheSize" value="100" />
+    </bean>
+
+    <!-- 消息消费者 start-->
+
+    <!-- 定义Queue监听器 -->
+    <jms:listener-container destination-type="queue" container-type="default"
+                            connection-factory="connectionFactory" acknowledge="auto">
+        <!-- 默认注册bean名称，应该是类名首字母小写  -->
+        <jms:listener destination="spring_queue" ref="queueConsumer1"/>
+        <!--<jms:listener destination="spring_queue" ref="queueConsumer2"/>-->
+    </jms:listener-container>
+
+    <!-- 定义Topic监听器 -->
+    <jms:listener-container destination-type="topic" container-type="default"
+                            connection-factory="connectionFactory" acknowledge="auto">
+        <jms:listener destination="spring_topic" ref="topicConsumer1"/>
+        <!--<jms:listener destination="spring_topic" ref="topicConsumer2"/>-->
+    </jms:listener-container>
+
+    <!-- 消息消费者 end -->
 
 </beans>
