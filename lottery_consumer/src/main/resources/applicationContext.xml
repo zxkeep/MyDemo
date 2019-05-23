@@ -193,14 +193,14 @@
                             connection-factory="connectionFactory" acknowledge="auto">
         <!-- 默认注册bean名称，应该是类名首字母小写  -->
         <jms:listener destination="spring_queue" ref="queueConsumer1"/>
-        <!--<jms:listener destination="spring_queue" ref="queueConsumer2"/>-->
+        <jms:listener destination="spring_queue" ref="queueConsumer2"/>
     </jms:listener-container>
 
     <!-- 定义Topic监听器 -->
     <jms:listener-container destination-type="topic" container-type="default"
                             connection-factory="connectionFactory" acknowledge="auto">
         <jms:listener destination="spring_topic" ref="topicConsumer1"/>
-        <!--<jms:listener destination="spring_topic" ref="topicConsumer2"/>-->
+        <jms:listener destination="spring_topic" ref="topicConsumer2"/>
     </jms:listener-container>
 
     <!-- 消息消费者 end -->
