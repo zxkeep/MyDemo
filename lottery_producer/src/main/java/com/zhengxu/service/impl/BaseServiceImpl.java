@@ -24,18 +24,18 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void update(T t) {
-        baseMapper.update(t);
+        baseMapper.updateByPrimaryKey(t);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void delete(Serializable id) {
-        baseMapper.delete(id);
+        baseMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public T getOne(Serializable id) {
-        return (T) baseMapper.selectOne(id);
+        return (T) baseMapper.selectByPrimaryKey(id);
     }
 
     @Override

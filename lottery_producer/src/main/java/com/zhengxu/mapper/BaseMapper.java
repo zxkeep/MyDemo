@@ -5,13 +5,33 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface BaseMapper<T> {
-    void insert(T t);
+    /**
+     *
+     * @mbg.generated 2019-06-18
+     */
+    int deleteByPrimaryKey(Serializable id);
 
-    void update(T t);
+    /**
+     *
+     * @mbg.generated 2019-06-18
+     */
+    int insert(T record);
 
-    void delete(Serializable id);
+    /**
+     *
+     * @mbg.generated 2019-06-18
+     */
+    T selectByPrimaryKey(Serializable id);
 
-    T selectOne(Serializable id);
-
+    /**
+     *
+     * @mbg.generated 2019-06-18
+     */
     List<T> selectAll();
+
+    /**
+     *
+     * @mbg.generated 2019-06-18
+     */
+    int updateByPrimaryKey(T record);
 }
