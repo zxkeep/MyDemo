@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengxu.mapper.UserCodeRecordMapper">
+  <resultMap id="BaseResultMap" type="com.zhengxu.domain.UserCodeRecord">
+    <id column="UL_ID" jdbcType="INTEGER" property="id" />
+    <result column="USE_ID" jdbcType="INTEGER" property="useId" />
+    <result column="USE_WIN_CODE" jdbcType="VARCHAR" property="useWinCode" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zx_user_code_record
+    where UL_ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhengxu.domain.UserCodeRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into zx_user_code_record (USE_ID, USE_WIN_CODE)
+    values (#{useId,jdbcType=INTEGER}, #{useWinCode,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zhengxu.domain.UserCodeRecord">
+    update zx_user_code_record
+    set USE_ID = #{useId,jdbcType=INTEGER},
+      USE_WIN_CODE = #{useWinCode,jdbcType=VARCHAR}
+    where UL_ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select UL_ID, USE_ID, USE_WIN_CODE
+    from zx_user_code_record
+    where UL_ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select UL_ID, USE_ID, USE_WIN_CODE
+    from zx_user_code_record
+  </select>
+</mapper>

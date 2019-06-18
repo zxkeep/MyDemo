@@ -1,17 +1,13 @@
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.zhengxu.domain.Product;
-import com.zhengxu.domain.User;
 import com.zhengxu.mapper.ProductMapper;
 import com.zhengxu.service.IProductService;
 import com.zhengxu.utils.RedisCacheManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 

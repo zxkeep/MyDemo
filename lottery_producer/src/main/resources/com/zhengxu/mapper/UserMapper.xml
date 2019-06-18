@@ -1,38 +1,48 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--客户映射 指定到dao接口 -->
 <mapper namespace="com.zhengxu.mapper.UserMapper">
-    <resultMap id="baseMap" type="User">
-        <id column="USE_ID" property="useId"/>
-        <result column="USE_NAME" property="useName"/>
-        <result column="USE_PHONE" property="usePhone"/>
-        <result column="USE_SEX" property="useSex"/>
-        <result column="USE_AGE" property="useAge"/>
-        <result column="USE_LOTTERY_NUMBER" property="useLotteryNumber"/>
-        <result column="DATA_DELETE" property="dataDelete"/>
-    </resultMap>
-    <select id="selectOne" resultMap="baseMap">
-        SELECT * FROM zx_user WHERE id = #{id}
-    </select>
+  <resultMap id="BaseResultMap" type="com.zhengxu.domain.User">
+    <id column="USE_ID" jdbcType="INTEGER" property="id" />
+    <result column="USE_NAME" jdbcType="VARCHAR" property="useName" />
+    <result column="USE_PHONE" jdbcType="VARCHAR" property="usePhone" />
+    <result column="USE_SEX" jdbcType="BIT" property="useSex" />
+    <result column="USE_AGE" jdbcType="INTEGER" property="useAge" />
+    <result column="USE_LOTTERY_NUMBER" jdbcType="VARCHAR" property="useLotteryNumber" />
+    <result column="DATA_DELETE" jdbcType="INTEGER" property="dataDelete" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zx_user
+    where USE_ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhengxu.domain.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into zx_user (USE_NAME, USE_PHONE, USE_SEX, 
+      USE_AGE, USE_LOTTERY_NUMBER, DATA_DELETE
+      )
+    values (#{useName,jdbcType=VARCHAR}, #{usePhone,jdbcType=VARCHAR}, #{useSex,jdbcType=BIT}, 
+      #{useAge,jdbcType=INTEGER}, #{useLotteryNumber,jdbcType=VARCHAR}, #{dataDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zhengxu.domain.User">
+    update zx_user
+    set USE_NAME = #{useName,jdbcType=VARCHAR},
+      USE_PHONE = #{usePhone,jdbcType=VARCHAR},
+      USE_SEX = #{useSex,jdbcType=BIT},
+      USE_AGE = #{useAge,jdbcType=INTEGER},
+      USE_LOTTERY_NUMBER = #{useLotteryNumber,jdbcType=VARCHAR},
+      DATA_DELETE = #{dataDelete,jdbcType=INTEGER}
+    where USE_ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select USE_ID, USE_NAME, USE_PHONE, USE_SEX, USE_AGE, USE_LOTTERY_NUMBER, DATA_DELETE
+    from zx_user
+    where USE_ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select USE_ID, USE_NAME, USE_PHONE, USE_SEX, USE_AGE, USE_LOTTERY_NUMBER, DATA_DELETE
+    from zx_user
+  </select>
 
-    <select id="selectAll" resultMap="baseMap">
-        SELECT *
-        FROM zx_user
-    </select>
-
-    <update id="update" parameterType="User">
-        UPDATE zx_user
-        SET
-        USE_NAME=#{useName},USE_PHONE=#{usePhone},USE_AGE=#{useAge},USE_SEX=#{useSex},USE_LOTTERY_NUMBER=#{useLotteryNumber}
-        WHERE id=#{id}
-    </update>
-
-    <delete id="delete">
-        DELETE FROM zx_user WHERE id=#{id}
-    </delete>
-
-    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO zx_user(USE_NAME, USE_PHONE, USE_AGE, USE_SEX, USE_LOTTERY_NUMBER)
-        VALUES (#{useName},#{usePhone},#{useAge},#{useSex},#{useLotteryNumber})
-    </insert>
 </mapper>
