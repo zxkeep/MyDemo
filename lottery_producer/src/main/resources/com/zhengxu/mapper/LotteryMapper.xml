@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengxu.mapper.LotteryMapper">
+  <resultMap id="BaseResultMap" type="com.zhengxu.domain.Lottery">
+    <id column="LOTTERY_ID" jdbcType="INTEGER" property="id" />
+    <result column="LOTTERY_NAME" jdbcType="VARCHAR" property="lotteryName" />
+    <result column="LOTTERY_PRICE" jdbcType="INTEGER" property="lotteryPrice" />
+    <result column="DATA_DELETE" jdbcType="INTEGER" property="dataDelete" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zx_lottery
+    where LOTTERY_ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhengxu.domain.Lottery">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into zx_lottery (LOTTERY_NAME, LOTTERY_PRICE, DATA_DELETE
+      )
+    values (#{lotteryName,jdbcType=VARCHAR}, #{lotteryPrice,jdbcType=INTEGER}, #{dataDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zhengxu.domain.Lottery">
+    update zx_lottery
+    set LOTTERY_NAME = #{lotteryName,jdbcType=VARCHAR},
+      LOTTERY_PRICE = #{lotteryPrice,jdbcType=INTEGER},
+      DATA_DELETE = #{dataDelete,jdbcType=INTEGER}
+    where LOTTERY_ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select LOTTERY_ID, LOTTERY_NAME, LOTTERY_PRICE, DATA_DELETE
+    from zx_lottery
+    where LOTTERY_ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select LOTTERY_ID, LOTTERY_NAME, LOTTERY_PRICE, DATA_DELETE
+    from zx_lottery
+  </select>
+  <resultMap id="BaseResultMap" type="com.zhengxu.domain.Lottery">
+    <id column="LOTTERY_ID" jdbcType="INTEGER" property="id" />
+    <result column="LOTTERY_NAME" jdbcType="VARCHAR" property="lotteryName" />
+    <result column="LOTTERY_PRICE" jdbcType="INTEGER" property="lotteryPrice" />
+    <result column="DATA_DELETE" jdbcType="INTEGER" property="dataDelete" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zx_lottery
+    where LOTTERY_ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhengxu.domain.Lottery">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into zx_lottery (LOTTERY_NAME, LOTTERY_PRICE, DATA_DELETE
+      )
+    values (#{lotteryName,jdbcType=VARCHAR}, #{lotteryPrice,jdbcType=INTEGER}, #{dataDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zhengxu.domain.Lottery">
+    update zx_lottery
+    set LOTTERY_NAME = #{lotteryName,jdbcType=VARCHAR},
+      LOTTERY_PRICE = #{lotteryPrice,jdbcType=INTEGER},
+      DATA_DELETE = #{dataDelete,jdbcType=INTEGER}
+    where LOTTERY_ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select LOTTERY_ID, LOTTERY_NAME, LOTTERY_PRICE, DATA_DELETE
+    from zx_lottery
+    where LOTTERY_ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select LOTTERY_ID, LOTTERY_NAME, LOTTERY_PRICE, DATA_DELETE
+    from zx_lottery
+  </select>
+</mapper>
