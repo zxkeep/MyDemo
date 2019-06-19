@@ -1,7 +1,7 @@
 /*
 *
 * UserMapper.java
-* Copyright(C) 2017-2020 fendo公司
+* Copyright(C) 2017-2020公司
 * @date 2019-06-18
 */
 package com.zhengxu.mapper;
@@ -9,7 +9,7 @@ package com.zhengxu.mapper;
 import com.zhengxu.domain.User;
 import java.util.List;
 
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
     /**
      *
      * @mbg.generated 2019-06-18

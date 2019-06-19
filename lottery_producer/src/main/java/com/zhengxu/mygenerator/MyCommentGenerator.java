@@ -256,7 +256,7 @@ public class MyCommentGenerator implements CommentGenerator{
     	compilationUnit.addFileCommentLine("/*");
     	compilationUnit.addFileCommentLine("*");
     	compilationUnit.addFileCommentLine("* "+compilationUnit.getType().getShortName()+".java");
-    	compilationUnit.addFileCommentLine("* Copyright(C) 2017-2020 fendo公司");
+    	compilationUnit.addFileCommentLine("* Copyright(C) zhengxu");
     	compilationUnit.addFileCommentLine("* @date "+sdf.format(new Date())+"");
     	compilationUnit.addFileCommentLine("*/");
 	}

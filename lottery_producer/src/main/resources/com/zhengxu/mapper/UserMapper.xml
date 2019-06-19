@@ -19,10 +19,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into zx_user (USE_NAME, USE_PHONE, USE_SEX, 
-      USE_AGE, USE_LOTTERY_NUMBER, DATA_DELETE
+      USE_AGE, USE_LOTTERY_NUMBER
       )
     values (#{useName,jdbcType=VARCHAR}, #{usePhone,jdbcType=VARCHAR}, #{useSex,jdbcType=BIT}, 
-      #{useAge,jdbcType=INTEGER}, #{useLotteryNumber,jdbcType=VARCHAR}, #{dataDelete,jdbcType=INTEGER}
+      #{useAge,jdbcType=INTEGER}, #{useLotteryNumber,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.zhengxu.domain.User">
