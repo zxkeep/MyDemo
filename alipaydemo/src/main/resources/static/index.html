@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-       <meta charset="UTF-8">
-       <title>keep-zhengxu-test</title>
+<head><meta charset="UTF-8">
+<title>keep-zhengxu-test</title>
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<H1>支付宝demo测试</H1>
+<canvas id="c" style="position: fixed;z-index: -1"></canvas>
+<script src="./js/index.js"></script>
+<div>
+<div align="center"><H1 style="color: chartreuse;alignment: center">支付宝demo测试</H1></div>
 <hr>
-<form action="order/alipay" method="post">
-       *商户订单 :<br>
+<div align="center">
+    <form action="order/alipay" style="align-content: center" method="post">
+       <font color="red" >*商户订单 :</font><br>
        <input type="text" name="out_trade_no"><br>
-       *订单名称 :<br>
+       <font color="#dc143c">*订单名称 :</font><br>
        <input type="text" name="subject"><br>
-       *付款金额 :<br>
+       <font color="blue">*付款金额 :</font><br>
        <input type="text" name="total_amount"><br>
-        商品描述 :<br>
+       <font color="#9932cc">商品描述 :</font><br>
        <input type="text" name="body"><br>
-       <input type="submit" value="支付宝支付">
-</form>
+       <input type="submit" style="color: darkturquoise" value="支付宝支付">
+    </form>
+</div>
+</div>
 </body>
 </html>
