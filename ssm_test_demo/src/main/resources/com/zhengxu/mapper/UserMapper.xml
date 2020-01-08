@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengxu.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.zhengxu.domain.User">
+    <id column="USE_ID" jdbcType="INTEGER" property="id" />
+    <result column="USE_NAME" jdbcType="VARCHAR" property="useName" />
+    <result column="USE_PHONE" jdbcType="VARCHAR" property="usePhone" />
+    <result column="USE_SEX" jdbcType="BIT" property="useSex" />
+    <result column="USE_AGE" jdbcType="INTEGER" property="useAge" />
+    <result column="USE_LOTTERY_NUMBER" jdbcType="VARCHAR" property="useLotteryNumber" />
+    <result column="DATA_DELETE" jdbcType="INTEGER" property="dataDelete" />
+  </resultMap>
+
+</mapper>
